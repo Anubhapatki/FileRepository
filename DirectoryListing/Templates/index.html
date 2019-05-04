@@ -1,0 +1,11 @@
+<h1>File Repository</h1>
+<iframe align="right" src="https://giphy.com/embed/eYilisUwipOEM" width="480" height="348" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+<ul>
+   {% for file in FileRepository %}
+        <h3><b>{{ file.name }}</b></h3>
+        <li>Path:{{ file.path }} </li>
+        <li>Creation Time:{{ file.creation_time }} </li>
+        <li>Modified Time:{{ file.modified_time }} </li>
+        <li>Size:{{ file.size }} </li>
+   {% endfor %}
+</ul>
