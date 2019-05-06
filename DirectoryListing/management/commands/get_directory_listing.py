@@ -25,8 +25,6 @@ class Command(BaseCommand):
                 filerepository = FileRepository(
                     name=f,
                     path=os.path.abspath(os.path.join(root, f)),
-                    #creation_time=timezone.make_aware(time.strftime('%Y-%m-%d %H:%M:%S',time.gmtime(os.path.getctime(os.path.join(root, f)))),timezone.get_current_timezone()),
-                    #modified_time=timezone.make_aware(time.strftime('%Y-%m-%d %H:%M:%S',time.gmtime(os.path.getmtime(os.path.join(root, f)))),timezone.get_current_timezone()),
                     creation_time=datetime.fromtimestamp(os.path.getctime(os.path.join(root, f)),tz=pytz.UTC),
                     modified_time=datetime.fromtimestamp(os.path.getmtime(os.path.join(root, f)), tz=pytz.UTC),
                     size= os.path.getsize(os.path.join(root, f))//100
