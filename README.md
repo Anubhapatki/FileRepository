@@ -56,9 +56,9 @@ A.   Used Django Management Command to check the directory name provided using o
 3. Monitor the directory to see if there are new files or changes in existing ones. (You can use
 cronjobs, infinite loops with parallel threads or any other solution that you consider)
 
-        Used watchdog(https://pythonhosted.org/watchdog/) Python library to monitor various filesystem events. The management 
-        command watchdog_dir_monitoring polls the desired library every second and looks for any events and updates the Filerepository 
-        table accrodingly.
+    Used watchdog(https://pythonhosted.org/watchdog/) Python library to monitor various filesystem events. The management 
+    command watchdog_dir_monitoring polls the desired library every second and looks for any events and updates the Filerepository 
+    table accrodingly.
 
     ```
     python manage.py watchdog_dir_monitoring <dir_name>
