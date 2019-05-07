@@ -23,25 +23,16 @@ app = Celery('FileRepo', broker="redis://localhost:6379")
 app.config_from_object('django.conf:settings',namespace="CELERY")
 app.autodiscover_tasks()
 
-"""
-app.conf.beat_schedule = {
-    'archive_old_files':{
-        'task': 'DirectoryListing.tasks.archive_old_files',
-        'schedule': crontab(minute=1)
-    },
-}
-"""
-
 @app.on_after_configure.connect()
 def setup_periodic_tasks(sender, **kwargs):
-    # Archive files after every few adys
+    # Archive files after every few days
     sender.add_periodic_task(crontab(day_of_week="*/5"), archive_files.s(), name = "archive old file")
     #sender.add_periodic_task(10.0, debug_task.s(), name='add test every 10')
 
 
 @app.task
 def archive_files():
-    archive_days=2
+    archive_days=5
     from DirectoryListing.models import FileRepository
     print('Request: {0!r}'.format("request"))
     old_files = FileRepository.objects.filter(creation_time__gte=now() - timedelta(days=archive_days))
