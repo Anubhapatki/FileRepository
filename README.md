@@ -51,14 +51,14 @@ A.   Used Django Management Command to check the directory name provided using o
 2. Import the data into a PostgreSQL/MySQL/MongoDB databases. The result should be one
  table or collection to store this information.
 
-A.   Store the details in Django Model FileRepository table. The above management command does both read and storing in the         model.
+    Store the details in Django Model FileRepository table. The above management command does both read and storing in the         model.
 
 3. Monitor the directory to see if there are new files or changes in existing ones. (You can use
 cronjobs, infinite loops with parallel threads or any other solution that you consider)
 
-A.   Used watchdog(https://pythonhosted.org/watchdog/) Python library to monitor various filesystem events. The management 
-    command watchdog_dir_monitoring polls the desired library every second and looks for any events and updates the Filerepository 
-    table accrodingly.
+        Used watchdog(https://pythonhosted.org/watchdog/) Python library to monitor various filesystem events. The management 
+        command watchdog_dir_monitoring polls the desired library every second and looks for any events and updates the Filerepository 
+        table accrodingly.
 
     ```
     python manage.py watchdog_dir_monitoring <dir_name>
@@ -67,7 +67,7 @@ A.   Used watchdog(https://pythonhosted.org/watchdog/) Python library to monitor
 4. Archive the oldest files (more than 5 days). You should consider having a new field in the
 database table or move the files to another directory.
 
-A.    Used Celery Aysnchronous Queus with Redis Message Broker, for archiving any files which are more then old in the FileRepository.
+    Used Celery Aysnchronous Queus with Redis Message Broker, for archiving any files which are more then old in the FileRepository.
     Celery Runs a periodic task every 5 days updates the Filerepository 'archived' flag and archived data field. This could be achieved 
     using a management commands and cron job as well. But if we talk about scalability and deploying this app of production environment 
     then monitoring and periodic tasks can be carried out in background without disturbing the request response.
@@ -90,8 +90,8 @@ A.    Used Celery Aysnchronous Queus with Redis Message Broker, for archiving an
  5. Develop an small web API with two endpoints to: get a JSON object with the avaiable files
     and get a JSON object with archived files.
     
- A.    Used Django RestFramework to create the two endpoints which would list the available and archived files. The Integration tests 
-    for these are available in DirectoryListing/tests.py. Due to time contraints I have not applied any authentication on the APIs.
+     Used Django RestFramework to create the two endpoints which would list the available and archived files. The Integration tests 
+        for these are available in DirectoryListing/tests.py. Due to time contraints I have not applied any authentication on the APIs.
     
     ```
     http://localhost:8000/api/available_files
